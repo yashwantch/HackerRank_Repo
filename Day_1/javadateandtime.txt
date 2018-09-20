@@ -1,0 +1,18 @@
+import java.util.*;
+import java.time.LocalDate;
+import java.time.DayOfWeek;
+class test{
+public static DayOfWeek getDay(String day,String month, String year) {
+    
+    int day1 = Integer.parseInt(day);
+    int month1 = Integer.parseInt(month);
+    int year1 = Integer.parseInt(year);
+    
+   /* Date date = (new GregorianCalendar(year1,month1,day1)).getTime();
+  SimpleDateFormat formatter = new SimpleDateFormat("EEEE");
+    String result = formatter.format(date); */
+    LocalDate localdate = LocalDate.of(year1,month1, day1);
+     DayOfWeek result = localdate.getDayOfWeek();
+
+    return result;
+}
