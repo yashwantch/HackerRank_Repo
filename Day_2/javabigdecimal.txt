@@ -1,0 +1,14 @@
+        //Write your code here
+
+
+for (int i=0;i<n;i++) {
+        for (int j=1;j<n-i;j++) {
+            BigDecimal bd = new BigDecimal(s[j]);
+            BigDecimal bd1 = new BigDecimal(s[j-1]);
+            if(bd.compareTo(bd1)==1){
+                String temp = s[j];
+                s[j] = s[j-1];
+                s[j-1] = temp;
+            }
+        }       
+    }
