@@ -1,0 +1,75 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        
+        Scanner sc = new Scanner(System.in);
+        int n=sc.nextInt();
+        int m=sc.nextInt();
+        BitSet bits1 = new BitSet(n);
+        BitSet bits2 = new BitSet(n);        
+       
+        
+        for(int i=0;i<m;i++)
+        {
+            String s = sc.next();
+            int set = sc.nextInt();
+            int set1 = sc.nextInt();
+            
+            if(s.equals("AND")){
+                if(set==1){
+                    bits1.and(bits2);
+                }//if
+                if(set==2){
+                    bits2.and(bits1);
+                }
+                
+                System.out.println( bits1.cardinality()+" "+bits2.cardinality( ));
+                
+            }//ADDIF
+            else if(s.equals("OR")){
+                if(set==1){
+                    bits1.or(bits2);
+                }
+                if(set==2){
+                    bits2.or(bits1);
+                }
+                System.out.println( bits1.cardinality()+" "+bits2.cardinality( ));
+            }//ORIF
+            
+            else if(s.equals("XOR")){
+                if(set==1){
+                    bits1.xor(bits2);
+                }
+                if(set==2){
+                    bits2.xor(bits1);
+                }
+                System.out.println( bits1.cardinality()+" "+bits2.cardinality( ));
+ 
+            }//XOR
+            else if(s.equals("SET")){
+                if(set==1){
+                    bits1.set(set1);
+                }   
+                if(set==2){
+                    bits2.set(set1);
+                }
+                System.out.println( bits1.cardinality()+" "+bits2.cardinality( ));
+            }//SETIF
+            else if(s.equals("FLIP")){
+                if(set==1){
+                    bits1.flip(set1);
+                }   
+                if(set==2){
+                    bits2.flip(set1);
+                }
+                System.out.println( bits1.cardinality()+" "+bits2.cardinality( ));
+            }//ADDIF
+            
+        }//conditons
+        
+    }
+}
