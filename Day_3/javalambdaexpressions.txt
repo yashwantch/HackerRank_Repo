@@ -1,0 +1,55 @@
+   // Write your code here
+
+public  PerformOperation isOdd() {
+
+    return a -> {
+        if((a % 2) == 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    };
+
+}
+
+public  PerformOperation isPrime() {
+        return  a -> {
+        boolean prime=false;
+        if (a < 2) 
+        {
+            prime=false;
+        }
+        else{  
+            int flag=0;
+            for(int i=2;i<=a/2;i++){      
+                if(a%i==0){      
+                         
+                    flag=1;
+                    prime=false;
+                    break;      
+                    }      
+                }      
+   if(flag==0)
+   {
+       prime=true;
+   }  
+  }//end of else  
+        return prime;
+    };
+
+}
+
+public  PerformOperation isPalindrome() {
+    return a -> {
+       String str = Integer.toString(a);
+       String str2 = "";
+       int i = 0;
+       int j = str.length() - 1;
+       for ( ; i <= j; ++i, --j) {
+           if (str.charAt(i) != str.charAt(j)) return false; 
+       }
+       return true;
+    };
+}
+}
