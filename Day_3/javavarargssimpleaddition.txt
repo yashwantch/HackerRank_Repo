@@ -1,0 +1,14 @@
+class Add{
+    
+    void add(int...a)
+    {
+        int sum=a[0];
+        System.out.print(a[0]);
+      for(int i=1;i<a.length;i++){
+          System.out.print("+" + a[i]);
+          sum=sum+a[i];   
+      }  
+        System.out.println("="+sum);
+        
+    }
+}
