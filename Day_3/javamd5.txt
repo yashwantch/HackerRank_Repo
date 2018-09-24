@@ -1,0 +1,28 @@
+import java.io.*;
+import java.util.*;
+import java.security.*;
+
+
+public class Solution  {
+
+    public static void main(String[] args) throws Exception {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        
+        Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+        
+
+        MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(str.getBytes());
+        
+        byte[] digest1 = md.digest();
+
+            StringBuffer sb = new StringBuffer();
+        for (byte b : digest1) {
+            sb.append(String.format("%02x", b ));
+        }
+            
+        System.out.println(sb.toString());     
+        
+    }
+}
