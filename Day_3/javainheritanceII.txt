@@ -1,0 +1,27 @@
+//Write your code here
+
+ class Arithmetic
+{
+    
+    public int add(int x,int y)
+    {
+        
+        return x+y;
+    }
+}
+
+ class Adder extends Arithmetic{
+    
+    public static void main(String args[])
+    {
+        
+        Scanner sc=new Scanner(System.in);
+        int x=sc.nextInt();
+        int y=sc.nextInt();
+        
+        Adder ad=new Adder();
+       System.out.println("My superclass is: Arithmetic"); 
+        System.out.println(ad.add(x,y));
+        
+    }
+}
