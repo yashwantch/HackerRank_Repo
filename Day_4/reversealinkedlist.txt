@@ -1,0 +1,27 @@
+    // Complete the reverse function below.
+
+    /*
+     * For your reference:
+     *
+     * SinglyLinkedListNode {
+     *     int data;
+     *     SinglyLinkedListNode next;
+     * }
+     *
+     */
+    static SinglyLinkedListNode reverse(SinglyLinkedListNode head) {
+        
+        
+        SinglyLinkedListNode previousNode=null;
+        SinglyLinkedListNode nextNode;
+        while(head!=null)
+        {
+            nextNode=head.next;
+            head.next=previousNode;
+            previousNode=head;
+            head=nextNode;
+        }
+        return previousNode;
+
+
+    }
