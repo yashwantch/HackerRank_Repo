@@ -1,0 +1,26 @@
+    // Complete the reversePrint function below.
+
+    /*
+     * For your reference:
+     *
+     * SinglyLinkedListNode {
+     *     int data;
+     *     SinglyLinkedListNode next;
+     * }
+     *
+     */
+    static void reversePrint(SinglyLinkedListNode head) {
+        
+        LinkedList<Integer> list = new LinkedList<Integer>();
+         while(head!=null){
+            list.add(head.data);
+            head=head.next;
+        }
+        Collections.reverse(list);
+        
+        for(Integer str: list){
+            System.out.println(str);
+        }
+
+
+    }
