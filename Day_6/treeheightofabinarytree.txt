@@ -1,0 +1,32 @@
+	/*
+    class Node 
+    	int data;
+    	Node left;
+    	Node right;
+	*/
+	public static int height(Node root) {
+        
+        int res=-1;
+        int r=0;
+        int l=0;
+        
+        if(root==null){
+        }
+        else{
+         Node right1 = root.right; 
+         Node left1 = root.left; 
+
+        r =   height(right1);    
+        l =  height(left1);
+            if(r>l){
+                res= r+1;
+            }
+            else{
+                res=l+1;
+            }
+            
+        }
+        
+        return res;
+      	// Write your code here.
+    }
