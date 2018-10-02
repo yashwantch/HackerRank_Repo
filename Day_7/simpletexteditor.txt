@@ -1,0 +1,42 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        
+        
+        Scanner sc = new Scanner(System.in);
+        int q = sc.nextInt();
+        String s = "";
+        Stack<String> st = new Stack<String>();
+        st.push(s);
+        
+        while(q > 0) {
+            int t = sc.nextInt();
+            
+            if(t == 1) {
+                String input = sc.next();
+                s = s+input;
+                st.push(s);
+            }else if(t == 2) {
+                int toDelete = sc.nextInt();
+                s=s.substring(0, s.length()-toDelete);
+                st.push(s);            
+            }else if(t == 3) {
+                int toPrint = sc.nextInt();
+                System.out.println(s.charAt(toPrint-1));
+            }
+            else {
+                st.pop();
+                s = st.peek();
+            }
+            q--;
+        }//while
+        
+    }
+}
