@@ -1,0 +1,159 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the bomberMan function below.
+    static String[] bomberMan(int n, String[] grid) {
+        
+        int r = grid.length;
+    int c = grid[0].length();
+    String[] result = new String[r];
+
+    // Reconstruction 1D to 2D
+    int[][] count2D = new int[r][c];
+    char[][] map2D = new char[r][c];
+
+    // Map initialize
+    for(int i = 0; i < r; i++) {
+        for(int j = 0; j < c; j++) {
+            if(grid[i].charAt(j) == 'O') {
+                count2D[i][j] = 3;
+                map2D[i][j] = 'O';
+            } else {
+                count2D[i][j] = 0;
+                map2D[i][j] = '.';
+            }
+        }
+    }
+
+    
+    for(int i = 0; i < r; i++) {
+        for(int j = 0; j < c; j++) {
+            if(map2D[i][j] == 'O') {
+                count2D[i][j]--;
+            } 
+        }
+    }
+
+    StringBuffer buffer = new StringBuffer();
+    if(n == 1) {
+        for(int i = 0; i < r; i++) {
+            for(int j = 0; j < c; j++) {
+                buffer.append(map2D[i][j]);
+            }
+            result[i] = buffer.toString();
+            buffer.setLength(0);
+        }
+        return result;
+    }
+    for(int i = 0; i < r; i++) {
+        for(int j = 0; j < c; j++) {
+            System.out.print(count2D[i][j] + " ");
+        }
+        System.out.println();
+    }
+
+    System.out.println();
+    // State N = 2
+    System.out.println("N = 2");
+    for(int i = 0; i < r; i++) {
+        for(int j = 0; j < c; j++) {
+            if(map2D[i][j] == 'O') {
+                count2D[i][j]--;
+            } else {
+                count2D[i][j] = 3;
+            }
+            if(count2D[i][j] == 3) {
+                map2D[i][j] = 'O';
+            }
+        }
+    }
+
+    
+    int[][] dir = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+    // State N = 3 
+    // From here, Pattern is repeat.
+    for(int k = 0; k < (n - 2)%4; k++) {
+        for(int i = 0; i < r; i++) {
+            for(int j = 0; j < c; j++) {
+                count2D[i][j]--;
+                if(count2D[i][j] == 0) {
+                    map2D[i][j] = '.';
+                    for(int l = 0; l < 4; l++) {
+                        if(i + dir[l][0]<r && i + dir[l][0]>=0 && j + dir[l][1] < c && j + dir[l][1] >= 0) {
+                            map2D[i + dir[l][0]][j + dir[l][1]] = '.';
+                        }
+                    }
+                }
+                if(count2D[i][j] == -1) {
+                    map2D[i][j] = 'O';
+                    count2D[i][j] = 3;
+                }
+            }
+        }
+        for(int i = 0; i < r; i++) {
+            for(int j = 0; j < c; j++) {
+                if(map2D[i][j] == '.') {
+                    count2D[i][j] = 0;
+                }
+            }
+        }
+    }
+
+    
+    for(int i = 0; i < r; i++) {
+        for(int j = 0; j < c; j++) {
+            buffer.append(map2D[i][j]);
+        }
+        result[i] = buffer.toString();
+        buffer.setLength(0);
+    }
+
+    return result;
+
+
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String[] rcn = scanner.nextLine().split(" ");
+
+        int r = Integer.parseInt(rcn[0]);
+
+        int c = Integer.parseInt(rcn[1]);
+
+        int n = Integer.parseInt(rcn[2]);
+
+        String[] grid = new String[r];
+
+        for (int i = 0; i < r; i++) {
+            String gridItem = scanner.nextLine();
+            grid[i] = gridItem;
+        }
+
+        String[] result = bomberMan(n, grid);
+
+        for (int i = 0; i < result.length; i++) {
+            bufferedWriter.write(result[i]);
+
+            if (i != result.length - 1) {
+                bufferedWriter.write("\n");
+            }
+        }
+
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
