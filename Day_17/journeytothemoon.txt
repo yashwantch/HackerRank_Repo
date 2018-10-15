@@ -1,0 +1,109 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the journeyToMoon function below.
+    private static int V;   
+    private static  LinkedList<Integer> adj[]; 
+    static boolean visited[];
+    
+    static long journeyToMoon(int n, int[][] astronaut) {
+        
+        graph(n);
+            
+            for(int i = 0 ; i < astronaut.length ; i++) {
+                int city1 = astronaut[i][0];
+                int city2 = astronaut[i][1];    
+                addEdge(city1 , city2);    
+            }
+        
+        ArrayList<Integer> countrySizes = traversal();
+        long sum = 0, result=0;
+        for(int size : countrySizes){
+           result += sum*size;
+           sum += size;    
+         }   
+        return result;
+
+    }
+    
+    public static int DFSUtil(int v) 
+    { 
+        // Mark the current node as visited and print it 
+        int count = 1;
+        visited[v] = true; 
+  
+        // Recur for all the vertices adjacent to this vertex 
+        Iterator<Integer> i = adj[v].listIterator(); 
+        while (i.hasNext()) 
+        { 
+            int n = i.next(); 
+            if (!visited[n]) 
+                count+=DFSUtil(n); 
+        } 
+        return count;
+    } 
+    
+    public static ArrayList<Integer> traversal(){
+        ArrayList<Integer> countrySizes = new ArrayList<>();
+        for (int i = 0; i < visited.length; i++) {
+            if(!visited[i])
+                countrySizes.add(DFSUtil(i));
+        }
+        return countrySizes;
+    }
+    
+    public static  void graph(int v) 
+    { 
+        V = v; 
+        adj = new LinkedList[v]; 
+        visited = new boolean[v];
+        for (int i=0; i<V; ++i) 
+            adj[i] = new LinkedList(); 
+    } 
+    
+   public static void addEdge(int v, int w) 
+    { 
+        adj[v].add(w);
+        adj[w].add(v);
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String[] np = scanner.nextLine().split(" ");
+
+        int n = Integer.parseInt(np[0]);
+
+        int p = Integer.parseInt(np[1]);
+
+        int[][] astronaut = new int[p][2];
+
+        for (int i = 0; i < p; i++) {
+            String[] astronautRowItems = scanner.nextLine().split(" ");
+            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+            for (int j = 0; j < 2; j++) {
+                int astronautItem = Integer.parseInt(astronautRowItems[j]);
+                astronaut[i][j] = astronautItem;
+            }
+        }
+
+        long result = journeyToMoon(n, astronaut);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
